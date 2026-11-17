@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Jerry</string>
+    <string name="app_url">https://jerry-coral-creative-studio.lovable.app</string>
+    <string name="offline_title">Jerry can\'t connect</string>
+    <string name="offline_message">Check your internet connection and try again.</string>
+    <string name="retry">Try again</string>
+</resources>

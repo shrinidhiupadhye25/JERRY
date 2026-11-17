@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.Jerry" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/jerry_coral</item>
+        <item name="colorPrimaryDark">@color/jerry_black</item>
+        <item name="colorAccent">@color/jerry_blue</item>
+        <item name="android:windowBackground">@color/jerry_black</item>
+        <item name="android:statusBarColor">@color/jerry_black</item>
+        <item name="android:navigationBarColor">@color/jerry_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

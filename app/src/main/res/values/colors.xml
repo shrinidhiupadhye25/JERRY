@@ -1,0 +1,10 @@
+<resources>
+    <!-- Same palette as the Jerry web app -->
+    <color name="jerry_black">#FF141110</color>
+    <color name="jerry_card">#FF221E1C</color>
+    <color name="jerry_coral">#FFFF7A5C</color>
+    <color name="jerry_coral_light">#FFFFA77A</color>
+    <color name="jerry_blue">#FF3D9BFF</color>
+    <color name="jerry_text">#FFF7F4F1</color>
+    <color name="jerry_muted">#FFA79C95</color>
+</resources>
