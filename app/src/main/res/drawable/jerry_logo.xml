@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Placeholder: replace with the Jerry mascot PNG (same name). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="100dp" android:height="84dp" android:viewportWidth="100" android:viewportHeight="84">
+    <path android:fillColor="#FFFF6B4F" android:pathData="M50,10a28,28 0,1 0,0.01 0z"/>
+</vector>

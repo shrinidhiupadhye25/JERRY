@@ -1,11 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Jerry" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/jerry_coral</item>
-        <item name="colorPrimaryDark">@color/jerry_black</item>
-        <item name="colorAccent">@color/jerry_blue</item>
-        <item name="android:windowBackground">@color/jerry_black</item>
-        <item name="android:statusBarColor">@color/jerry_black</item>
-        <item name="android:navigationBarColor">@color/jerry_black</item>
-        <item name="android:windowLightStatusBar">false</item>
+    <style name="Theme.Jerry" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="colorPrimary">@color/coral</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="Jerry" />
+    <style name="Jerry.SectionTitle">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Jerry.SeeAll">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="Jerry.QuickLabel">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Jerry.QuickButton">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:padding">17dp</item>
+        <item name="android:background">@drawable/bg_circle_dark</item>
+        <item name="android:tint">@color/coral</item>
+    </style>
+    <style name="Jerry.EventTime">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Jerry.EventTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Jerry.Chip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:paddingVertical">3dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="Jerry.NavLabel">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:layout_marginTop">2dp</item>
     </style>
 </resources>

@@ -1,7 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Jerry</string>
-    <string name="app_url">https://jerry-coral-creative-studio.lovable.app</string>
-    <string name="offline_title">Jerry can\'t connect</string>
-    <string name="offline_message">Check your internet connection and try again.</string>
-    <string name="retry">Try again</string>
+    <string name="date">Wednesday, November 18</string>
+    <string name="greeting">Good morning,</string>
+    <string name="user_name">Alex</string>
+    <string name="weather">24° and sunny · 4 events today</string>
+    <string name="ask_jerry">ASK JERRY</string>
+    <string name="ask_prompt">"Summarize my day and draft a reply to Daniel"</string>
+    <string name="ask_hint">Type or tap the mic…</string>
+    <string name="new_task">New task</string>
+    <string name="add_event">Add event</string>
+    <string name="inbox">Inbox</string>
+    <string name="search_web">Search web</string>
+    <string name="today">Today</string>
+    <string name="see_all">See all</string>
+    <string name="pending_tasks">Pending tasks</string>
+    <string name="important_mail">Important mail</string>
+    <string name="upcoming_alarms">Upcoming alarms</string>
+    <string name="active_projects">Active projects</string>
 </resources>

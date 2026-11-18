@@ -1,10 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Same palette as the Jerry web app -->
-    <color name="jerry_black">#FF141110</color>
-    <color name="jerry_card">#FF221E1C</color>
-    <color name="jerry_coral">#FFFF7A5C</color>
-    <color name="jerry_coral_light">#FFFFA77A</color>
-    <color name="jerry_blue">#FF3D9BFF</color>
-    <color name="jerry_text">#FFF7F4F1</color>
-    <color name="jerry_muted">#FFA79C95</color>
+    <color name="bg">#FF0B0B0D</color>
+    <color name="surface">#FF141416</color>
+    <color name="surface_2">#FF1C1C1F</color>
+    <color name="stroke">#1FFFFFFF</color>
+    <color name="text_primary">#FFF5F5F5</color>
+    <color name="text_secondary">#FFA3A3A8</color>
+    <color name="text_muted">#FF75757A</color>
+    <color name="coral">#FFFF6B4F</color>
+    <color name="coral_light">#FFFF9A7A</color>
+    <color name="coral_dark">#FFE8503A</color>
+    <color name="blue">#FF3B9BFF</color>
+    <color name="ink">#FF1A1210</color>
+    <color name="ask_field">#FF221614</color>
 </resources>

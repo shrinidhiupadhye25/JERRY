@@ -1,163 +1,81 @@
 package com.jerry.assistant;
 
-import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-/**
- * Jerry for Android.
- * Shows the exact same Jerry app (same screens, colors, logo and animations)
- * inside a full-screen WebView.
- */
 public class MainActivity extends AppCompatActivity {
 
-    private WebView webView;
-    private ProgressBar progressBar;
-    private LinearLayout offlineView;
-    private SwipeRefreshLayout swipeRefresh;
-    private String appUrl;
-    private String appHost;
+    private LinearLayout navHome, navChat, navCalendar, navTasks;
 
-    @SuppressLint("SetJavaScriptEnabled")
+    // We track which nav tab index is active (0=Home,1=Chat,2=Calendar,3=Tasks)
+    private int activeTab = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        appUrl = getString(R.string.app_url);
-        appHost = Uri.parse(appUrl).getHost();
+        // Grab nav tabs
+        navHome     = findViewById(R.id.navHome);
+        navChat     = findViewById(R.id.navChat);
+        navCalendar = findViewById(R.id.navCalendar);
+        navTasks    = findViewById(R.id.navTasks);
 
-        webView = findViewById(R.id.web_view);
-        progressBar = findViewById(R.id.progress_bar);
-        offlineView = findViewById(R.id.offline_view);
-        swipeRefresh = findViewById(R.id.swipe_refresh);
-        Button retryButton = findViewById(R.id.retry_button);
-
-        swipeRefresh.setColorSchemeResources(R.color.jerry_coral, R.color.jerry_blue);
-        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.jerry_card);
-        swipeRefresh.setOnRefreshListener(() -> webView.reload());
-        // Only allow pull-to-refresh when the page is scrolled to the very top.
-        webView.getViewTreeObserver().addOnScrollChangedListener(
-                () -> swipeRefresh.setEnabled(webView.getScrollY() == 0));
-
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setDatabaseEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        settings.setMediaPlaybackRequiresUserGesture(false);
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setSupportZoom(false);
-        settings.setTextZoom(100); // keep text exactly the size it is on the web
-
-        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        webView.setVerticalScrollBarEnabled(false);
-
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Uri uri = request.getUrl();
-                if (appHost != null && appHost.equals(uri.getHost())) {
-                    return false; // stay inside Jerry
-                }
-                // Links to other sites open in the phone's browser / matching app.
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                } catch (ActivityNotFoundException ignored) {
-                }
-                return true;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                progressBar.setVisibility(View.GONE);
-                swipeRefresh.setRefreshing(false);
-            }
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                if (request.isForMainFrame()) {
-                    offlineView.setVisibility(View.VISIBLE);
-                    swipeRefresh.setRefreshing(false);
-                }
-            }
-        });
-
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                progressBar.setProgress(newProgress);
-            }
-        });
-
-        retryButton.setOnClickListener(v -> {
-            offlineView.setVisibility(View.GONE);
-            webView.reload();
-        });
-
-        // Android back button goes back inside Jerry before closing the app.
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (webView.canGoBack()) {
-                    webView.goBack();
-                } else {
-                    finish();
-                }
-            }
-        });
-
-        if (savedInstanceState != null) {
-            webView.restoreState(savedInstanceState);
-        } else {
-            webView.loadUrl(appUrl);
+        // Load Home by default
+        if (savedInstanceState == null) {
+            loadFragment(new HomeFragment(), 0);
         }
+
+        navHome.setOnClickListener(v -> loadFragment(new HomeFragment(), 0));
+        navChat.setOnClickListener(v -> loadFragment(new ChatFragment(), 1));
+        navCalendar.setOnClickListener(v -> loadFragment(new CalendarFragment(), 2));
+        navTasks.setOnClickListener(v -> loadFragment(new TasksFragment(), 3));
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        webView.saveState(outState);
+    private void loadFragment(Fragment fragment, int tabIndex) {
+        if (activeTab == tabIndex) return; // already on this tab, do nothing
+        activeTab = tabIndex;
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragmentContainer, fragment);
+        ft.commit();
+
+        updateNavColors(tabIndex);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        webView.onResume();
-    }
+    /**
+     * Tints the active nav icon + label coral; inactive ones go grey.
+     * Each nav LinearLayout has 1 ImageView and 1 TextView as direct children.
+     */
+    private void updateNavColors(int activeIndex) {
+        LinearLayout[] tabs = {navHome, navChat, navCalendar, navTasks};
+        int coral  = ContextCompat.getColor(this, R.color.coral);
+        int grey   = ContextCompat.getColor(this, R.color.text_secondary);
 
-    @Override
-    protected void onPause() {
-        webView.onPause();
-        super.onPause();
-    }
+        for (int i = 0; i < tabs.length; i++) {
+            LinearLayout tab = tabs[i];
+            int color = (i == activeIndex) ? coral : grey;
 
-    @Override
-    protected void onDestroy() {
-        webView.destroy();
-        super.onDestroy();
+            // Child 0 = ImageView (icon), Child 1 = TextView (label)
+            if (tab.getChildCount() >= 2) {
+                View iconView  = tab.getChildAt(0);
+                View labelView = tab.getChildAt(1);
+
+                if (iconView instanceof ImageView) {
+                    ((ImageView) iconView).setColorFilter(color);
+                }
+                if (labelView instanceof TextView) {
+                    ((TextView) labelView).setTextColor(color);
+                }
+            }
+        }
     }
 }

@@ -1,13 +1,13 @@
 <resources>
-    <style name="Theme.Jerry" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/jerry_coral</item>
-        <item name="colorPrimaryDark">@color/jerry_black</item>
-        <item name="colorAccent">@color/jerry_blue</item>
-        <item name="android:windowBackground">@color/jerry_black</item>
-        <item name="android:statusBarColor">@color/jerry_black</item>
-        <item name="android:navigationBarColor">@color/jerry_black</item>
+    <style name="Theme.Jerry" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/coral</item>
+        <item name="colorPrimaryDark">@color/bg</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowSplashScreenBackground">@color/jerry_black</item>
+        <item name="android:windowSplashScreenBackground">@color/bg</item>
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
     </style>
 </resources>
